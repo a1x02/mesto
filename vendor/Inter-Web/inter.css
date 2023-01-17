@@ -48,7 +48,7 @@
   src: url("Inter-LightItalic.woff2?v=3.19") format("woff2"),
        url("Inter-LightItalic.woff?v=3.19") format("woff");
 }
-
+/*used*/
 @font-face {
   font-family: 'Inter';
   font-style:  normal;
