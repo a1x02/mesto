@@ -1,0 +1,14 @@
+.profile-info {
+  margin: auto 0 auto 30px;
+  /*border: 1px solid blue;*/
+  position: relative;
+}
+
+@media screen and (max-width: 879px) {
+  .profile-info {
+    margin-top: 26px;
+    margin-left: 0;
+    width: 100%;
+    /*text-align: center;*/
+  }
+}
