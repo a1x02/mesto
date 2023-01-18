@@ -10,6 +10,7 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size: 10px;
+  cursor: pointer;
 }
 
 .profile__edit-button:hover {
