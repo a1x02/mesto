@@ -31,3 +31,4 @@
 @import url("../blocks/popup/__save-button/popup__save-button.css");
 @import url("../blocks/popup/__title/popup__title.css");
 @import url("../blocks/popup/__overlay/popup__overlay.css");
+@import url("../blocks/popup/_show/popup_show.css");
