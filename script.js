@@ -6,7 +6,8 @@ let form = popup.querySelector('.popup__form')
 let profileName = profile.querySelector('.profile__name')
 let profileDescription = profile.querySelector('.profile__description')
 let saveButton = form.querySelector('.popup__save-button')
-
+let name = "Жак-Ив Кусто"
+let description = "Исследователь океана"
 
 function openPopUp() {
     let formName = form.querySelector('.popup__name')
@@ -28,8 +29,8 @@ function saveProfile() {
     let formName = form.querySelector('.popup__name')
     let formDescription = form.querySelector('.popup__description')
 
-    profileName.textContent = formName.value
-    profileDescription.textContent = formDescription.value
+    name = formName.value
+    description = formDescription.value
 
     formName.value = ''
     formDescription.value = ''
