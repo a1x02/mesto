@@ -1,12 +1,13 @@
 .profile__name {
   margin: 0;
   padding: 0;
+  max-width: 500px;
   font-style: normal;
   font-weight: 500;
   font-size: 42px;
   line-height: 48px;
   /* or 114% */
-  display: inline-flex;
+  display: inline-block;
   /*border: 1px dashed white;*/
   color: #FFFFFF;
   text-overflow: ellipsis;
