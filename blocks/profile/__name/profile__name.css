@@ -9,6 +9,9 @@
   display: inline-flex;
   /*border: 1px dashed white;*/
   color: #FFFFFF;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 @media screen and (max-width: 879px) {
