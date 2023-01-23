@@ -1,0 +1,9 @@
+.popup {
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  display: none;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}

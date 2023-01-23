@@ -1,0 +1,56 @@
+let profile = document.querySelector('.profile')
+let editButton = profile.querySelector('.profile__edit-button')
+let popup = document.querySelector('.popup')
+let closeButton = popup.querySelector('.popup__close')
+let form = popup.querySelector('.popup__form')
+let profileName = profile.querySelector('.profile__name')
+let profileDescription = profile.querySelector('.profile__description')
+let saveButton = form.querySelector('.popup__save-button')
+
+function openPopUp() {
+    let formName = form.querySelector('.popup__name')
+    let formDescription = form.querySelector('.popup__description')
+
+    formName.value = profileName.textContent
+    formDescription.value = profileDescription.textContent
+
+    popup.classList.add('popup_show', true)
+
+    // console.log(profileName.textContent)
+    // console.log(formName.value)
+}
+
+function closePopUp() {
+    popup.classList.remove('popup_show')
+}
+
+function saveProfile() {
+    let formName = form.querySelector('.popup__name')
+    let formDescription = form.querySelector('.popup__description')
+
+    profileName.textContent = formName.value
+    profileDescription.textContent = formDescription.value
+
+    formName.value = ''
+    formDescription.value = ''
+}
+
+editButton.addEventListener('click', openPopUp)
+
+closeButton.addEventListener('click', (eventClose) => {
+    eventClose.preventDefault()
+    closePopUp()
+})
+
+saveButton.addEventListener('click', (eventSave) => {
+    eventSave.preventDefault()
+    saveProfile()
+    closePopUp()
+})
+
+form.addEventListener('keypress', (eventSaveOnEnter) => {
+    if (eventSaveOnEnter.key === "Enter") {
+        eventSaveOnEnter.preventDefault()
+        saveButton.click()
+    }
+})

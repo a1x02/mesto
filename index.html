@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mesto Russia</title>
+  <link rel="stylesheet" href="pages/index.css">
+</head>
+<body class="body">
+  <div class="page">
+    <header class="header">
+      <img class="header__logo" alt="логотип Mesto" src="images/header__logo.svg">
+    </header>
+    <section class="profile">
+      <img class="profile__avatar" src="images/profile__avatar.jpg" alt="аватар пользователя">
+      <div class="profile-info">
+        <h1 class="profile__name">Жак-Ив Кусто</h1>
+        <button class="profile__edit-button">
+        </button>
+        <p class="profile__description">Исследователь океана</p>
+
+      </div>
+      <button class="profile__add-button">
+      </button>
+    </section>
+    <section class="elements">
+      <div class="element">
+        <img class="element__image" src="images/karachaevsk.jpg" alt="Карачаевск">
+        <div class="element__description">
+          <h2 class="element__title">Карачаевск</h2>
+          <button class="element__like-button"></button>
+        </div>
+
+      </div>
+      <div class="element">
+        <img class="element__image" src="images/elbrus.png" alt="Эльбрус">
+        <div class="element__description">
+          <h2 class="element__title">Гора Эльбрус</h2>
+          <button class="element__like-button"></button>
+        </div>
+      </div>
+      <div class="element">
+        <img class="element__image" src="images/dombai.png" alt="Домбай">
+        <div class="element__description">
+          <h2 class="element__title">Домбай</h2>
+          <button class="element__like-button"></button>
+        </div>
+      </div>
+      <div class="element">
+        <img class="element__image" src="images/elbrus.png" alt="Эльбрус">
+        <div class="element__description">
+          <h2 class="element__title">Гора Эльбрус</h2>
+          <button class="element__like-button"></button>
+        </div>
+      </div>
+      <div class="element">
+        <img class="element__image" src="images/dombai.png" alt="Домбай">
+        <div class="element__description">
+          <h2 class="element__title">Домбай</h2>
+          <button class="element__like-button"></button>
+        </div>
+      </div>
+      <div class="element">
+        <img class="element__image" src="images/karachaevsk.jpg" alt="Карачаевск">
+        <div class="element__description">
+          <h2 class="element__title">Карачаево-Черкессия</h2>
+          <button class="element__like-button"></button>
+        </div>
+      </div>
+    </section>
+    <section class="footer">
+      <p class="footer__copyright">&copy; 2023 Mesto Russia</p>
+    </section>
+    <section class="popup">
+      <div class="popup__overlay"></div>
+      <form class="popup__form">
+        <button class="popup__close"></button>
+        <h2 class="popup__title">Редактировать профиль</h2>
+        <input class="popup__name" value="Жак-Ив Кусто">
+        <input class="popup__description" value="Исследователь океана">
+        <button class="popup__save-button">Сохранить</button>
+      </form>
+    </section>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
