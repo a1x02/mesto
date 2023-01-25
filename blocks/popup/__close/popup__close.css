@@ -6,7 +6,7 @@
   right: -40px;
   border: 0;
   background-color: rgba(0, 0, 0, 0);
-  background-image: url("/images/close-button.svg");
+  background-image: url("../../../images/close-button.svg");
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
