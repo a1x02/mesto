@@ -15,7 +15,6 @@
   align-self: center;
   flex-shrink: 0;
   cursor: pointer;
-  z-index: 3;
 }
 
 .element__like-button:hover {
