@@ -1,0 +1,7 @@
+.profile__top {
+  margin: 0;
+  padding: 0;
+  /*border: 1px solid red;*/
+  position: relative;
+  display: flex;
+}
