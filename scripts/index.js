@@ -5,34 +5,31 @@ let closeButton = popup.querySelector('.popup__close')
 let form = popup.querySelector('.popup__form')
 let profileName = profile.querySelector('.profile__name')
 let profileDescription = profile.querySelector('.profile__description')
-let saveButton = form.querySelector('.popup__save-button')
+
+let formName = form.querySelector('.popup__input_name')
+let formDescription = form.querySelector('.popup__input_description')
 
 function openPopUp() {
-    let formName = form.querySelector('.popup__name')
-    let formDescription = form.querySelector('.popup__description')
-
     formName.value = profileName.textContent
     formDescription.value = profileDescription.textContent
 
-    popup.classList.add('popup_show', true)
+    popup.classList.add('popup_opened', true)
 
     // console.log(profileName.textContent)
     // console.log(formName.value)
 }
 
 function closePopUp() {
-    popup.classList.remove('popup_show')
+    popup.classList.remove('popup_opened')
 }
 
 function saveProfile() {
-    let formName = form.querySelector('.popup__name')
-    let formDescription = form.querySelector('.popup__description')
-
     profileName.textContent = formName.value
     profileDescription.textContent = formDescription.value
 
     formName.value = ''
     formDescription.value = ''
+    closePopUp()
 }
 
 editButton.addEventListener('click', openPopUp)
@@ -42,15 +39,14 @@ closeButton.addEventListener('click', (eventClose) => {
     closePopUp()
 })
 
-saveButton.addEventListener('click', (eventSave) => {
+form.addEventListener('submit', (eventSave) => {
     eventSave.preventDefault()
     saveProfile()
-    closePopUp()
 })
 
-form.addEventListener('keypress', (eventSaveOnEnter) => {
-    if (eventSaveOnEnter.key === "Enter") {
-        eventSaveOnEnter.preventDefault()
-        saveButton.click()
-    }
-})
+// form.addEventListener('keypress', (eventSaveOnEnter) => {
+//     if (eventSaveOnEnter.key === "Enter") {
+//         eventSaveOnEnter.preventDefault()
+//         saveButton.click()
+//     }
+// })
