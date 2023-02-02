@@ -12,6 +12,7 @@
 
 @media screen and (min-width: 581px) and (max-width: 879px) {
   .elements {
+    margin-top: 36px;
     grid-template-columns: repeat(2, 1fr);
     max-width: 581px;
   }
@@ -19,6 +20,7 @@
 
 @media screen and (max-width: 580px) {
   .elements {
+    margin-top: 36px;
     grid-template-columns: 1fr;
     max-width: 282px;
   }
