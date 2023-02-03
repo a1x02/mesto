@@ -1,4 +1,4 @@
-.popup__input {
+.popup__form_input {
   margin: 0;
   padding: 0 0 13px;
   display: block;
@@ -15,12 +15,12 @@
   color: #000000;
 }
 
-.popup__input:focus {
+.popup__form_input:focus {
   outline: 1px solid black;
 }
 
 @media screen and (max-width: 580px) {
-  .popup__input {
+  .popup__form_input {
     width: 238px;
   }
 }

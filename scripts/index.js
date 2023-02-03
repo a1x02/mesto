@@ -6,8 +6,8 @@ let form = popup.querySelector('.popup__form')
 let profileName = profile.querySelector('.profile__name')
 let profileDescription = profile.querySelector('.profile__description')
 
-let formName = form.querySelector('.popup__input_name')
-let formDescription = form.querySelector('.popup__input_description')
+let formName = form.querySelector('.popup__form_input_name')
+let formDescription = form.querySelector('.popup__form_input_description')
 
 function openPopUp() {
     formName.value = profileName.textContent
