@@ -1,13 +1,15 @@
-let profile = document.querySelector('.profile')
-let editButton = profile.querySelector('.profile__edit-button')
-let popup = document.querySelector('.popup')
-let closeButton = popup.querySelector('.popup__close')
-let form = popup.querySelector('.popup__form')
-let profileName = profile.querySelector('.profile__name')
-let profileDescription = profile.querySelector('.profile__description')
+const profile = document.querySelector('.profile')
+const editButton = profile.querySelector('.profile__edit-button')
+const popup = document.querySelector('.popup')
+const closeButton = popup.querySelector('.popup__close')
+const form = popup.querySelector('.popup__form')
+const profileName = profile.querySelector('.profile__name')
+const profileDescription = profile.querySelector('.profile__description')
+const formName = form.querySelector('.popup__input_subject_name')
+const formDescription = form.querySelector('.popup__input_subject_description')
+const elementTemplate = document.querySelector('#element-template').content
+const sectionElements = document.querySelector('.elements')
 
-let formName = form.querySelector('.popup__input_subject_name')
-let formDescription = form.querySelector('.popup__input_subject_description')
 
 const initialCards = [
     {
@@ -66,4 +68,14 @@ closeButton.addEventListener('click', (eventClose) => {
 form.addEventListener('submit', (eventSave) => {
     eventSave.preventDefault()
     saveProfile()
+})
+
+initialCards.forEach(function (item) {
+    const elementCard = elementTemplate.querySelector('.element').cloneNode(true)
+    elementCard.querySelector('.element__image').src = item.link
+    elementCard.querySelector('.element__image').alt = item.name
+    elementCard.querySelector('.element__title').textContent = item.name
+    console.log(item.name)
+
+    sectionElements.append(elementCard)
 })
