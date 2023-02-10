@@ -80,6 +80,14 @@ const saveElement = function () {
     elementCard.querySelector('.element__image').alt = formAddName.value
     elementCard.querySelector('.element__title').textContent = formAddName.value
 
+    const deleteButton = elementCard.querySelector('.delete-button')
+
+    deleteButton.addEventListener('click', (eventDelete) => {
+        eventDelete.preventDefault()
+        const elementsItem = deleteButton.closest('.element')
+        elementsItem.remove()
+    })
+
     sectionElements.prepend(elementCard)
     closePopUp()
 }
@@ -112,6 +120,14 @@ initialCards.forEach(function (item) {
     elementCard.querySelector('.element__image').src = item.link
     elementCard.querySelector('.element__image').alt = item.name
     elementCard.querySelector('.element__title').textContent = item.name
+
+    const deleteButton = elementCard.querySelector('.delete-button')
+
+    deleteButton.addEventListener('click', (eventDelete) => {
+        eventDelete.preventDefault()
+        const elementsItem = deleteButton.closest('.element')
+        elementsItem.remove()
+    })
 
     sectionElements.append(elementCard)
 })
