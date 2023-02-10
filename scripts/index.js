@@ -81,11 +81,17 @@ const saveElement = function () {
     elementCard.querySelector('.element__title').textContent = formAddName.value
 
     const deleteButton = elementCard.querySelector('.delete-button')
+    const likeButton = elementCard.querySelector('.element__like-button')
 
     deleteButton.addEventListener('click', (eventDelete) => {
         eventDelete.preventDefault()
         const elementsItem = deleteButton.closest('.element')
         elementsItem.remove()
+    })
+
+    likeButton.addEventListener('click', (eventLike) => {
+        eventLike.preventDefault()
+        likeButton.classList.toggle('element__like-button_active')
     })
 
     sectionElements.prepend(elementCard)
@@ -122,6 +128,7 @@ initialCards.forEach(function (item) {
     elementCard.querySelector('.element__title').textContent = item.name
 
     const deleteButton = elementCard.querySelector('.delete-button')
+    const likeButton = elementCard.querySelector('.element__like-button')
 
     deleteButton.addEventListener('click', (eventDelete) => {
         eventDelete.preventDefault()
@@ -129,5 +136,12 @@ initialCards.forEach(function (item) {
         elementsItem.remove()
     })
 
+    likeButton.addEventListener('click', (eventLike) => {
+        eventLike.preventDefault()
+        likeButton.classList.toggle('element__like-button_active')
+    })
+
     sectionElements.append(elementCard)
 })
+
+
