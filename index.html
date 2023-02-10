@@ -32,13 +32,24 @@
     <footer class="footer">
       <p class="footer__copyright">&copy; 2023 Mesto Russia</p>
     </footer>
-    <section class="popup">
+    <section class="popup" id="popup-edit">
       <div class="popup__container">
         <button class="popup__close" type="button"></button>
         <h2 class="popup__title">Редактировать профиль</h2>
-        <form class="popup__form" name="popup-form">
+        <form class="popup__form" name="popup-form" id="form-edit">
           <input class="popup__input popup__input_subject_name" value="Жак-Ив Кусто" name="popup-input-name">
           <input class="popup__input popup__input_subject_description" value="Исследователь океана" name="popup-input-description">
+          <button class="popup__save-button" type="submit">Сохранить</button>
+        </form>
+      </div>
+    </section>
+    <section class="popup" id="popup-add">
+      <div class="popup__container">
+        <button class="popup__close" type="button"></button>
+        <h2 class="popup__title">Новое место</h2>
+        <form class="popup__form" name="popup-form" id="form-add">
+          <input class="popup__input popup__input_subject_name" placeholder="Название" name="popup-input-name">
+          <input class="popup__input popup__input_subject_description" placeholder="Ссылка на картинку" name="popup-input-description">
           <button class="popup__save-button" type="submit">Сохранить</button>
         </form>
       </div>

@@ -1,12 +1,19 @@
 const profile = document.querySelector('.profile')
 const editButton = profile.querySelector('.profile__edit-button')
+const addButton = profile.querySelector('.profile__add-button')
 const popup = document.querySelector('.popup')
-const closeButton = popup.querySelector('.popup__close')
-const form = popup.querySelector('.popup__form')
+const popupEdit = document.querySelector('#popup-edit')
+const popupAdd = document.querySelector('#popup-add')
+const closeButtonEdit = popupEdit.querySelector('.popup__close')
+const closeButtonAdd = popupAdd.querySelector('.popup__close')
+const formEdit = popupEdit.querySelector('#form-edit')
+const formAdd = popupAdd.querySelector('#form-add')
+const formAddName = formAdd.querySelector('.popup__input_subject_name')
+const formAddLink = formAdd.querySelector('.popup__input_subject_description')
 const profileName = profile.querySelector('.profile__name')
 const profileDescription = profile.querySelector('.profile__description')
-const formName = form.querySelector('.popup__input_subject_name')
-const formDescription = form.querySelector('.popup__input_subject_description')
+const formEditName = formEdit.querySelector('.popup__input_subject_name')
+const formEditDescription = formEdit.querySelector('.popup__input_subject_description')
 const elementTemplate = document.querySelector('#element-template').content
 const sectionElements = document.querySelector('.elements')
 
@@ -38,36 +45,66 @@ const initialCards = [
     }
 ];
 
-const openPopUp = function () {
-    formName.value = profileName.textContent
-    formDescription.value = profileDescription.textContent
+const openPopUpEdit = function () {
+    formEditName.value = profileName.textContent
+    formEditDescription.value = profileDescription.textContent
 
-    popup.classList.add('popup_opened', true)
+    popupEdit.classList.add('popup_opened', true)
+}
+
+const openPopUpAdd = function () {
+    popupAdd.classList.add('popup_opened', true)
 }
 
 const closePopUp = function () {
-    popup.classList.remove('popup_opened')
+    if (popupEdit.classList.contains('popup_opened')) {
+        popupEdit.classList.remove('popup_opened')
+    }
+    if (popupAdd.classList.contains('popup_opened')) {
+        popupAdd.classList.remove('popup_opened')
+    }
 }
 
 const saveProfile = function () {
-    profileName.textContent = formName.value
-    profileDescription.textContent = formDescription.value
+    profileName.textContent = formEditName.value
+    profileDescription.textContent = formEditDescription.value
 
-    formName.value = ''
-    formDescription.value = ''
+    formEditName.value = ''
+    formEditDescription.value = ''
     closePopUp()
 }
 
-editButton.addEventListener('click', openPopUp)
+const saveElement = function () {
+    const elementCard = elementTemplate.querySelector('.element').cloneNode(true)
+    elementCard.querySelector('.element__image').src = formAddLink.value
+    elementCard.querySelector('.element__image').alt = formAddName.value
+    elementCard.querySelector('.element__title').textContent = formAddName.value
 
-closeButton.addEventListener('click', (eventClose) => {
+    sectionElements.prepend(elementCard)
+    closePopUp()
+}
+
+editButton.addEventListener('click', openPopUpEdit)
+addButton.addEventListener('click', openPopUpAdd)
+
+closeButtonEdit.addEventListener('click', (eventClose) => {
     eventClose.preventDefault()
     closePopUp()
 })
 
-form.addEventListener('submit', (eventSave) => {
+closeButtonAdd.addEventListener('click', (eventClose) => {
+    eventClose.preventDefault()
+    closePopUp()
+})
+
+formEdit.addEventListener('submit', (eventSave) => {
     eventSave.preventDefault()
     saveProfile()
+})
+
+formAdd.addEventListener('submit', (eventSave) => {
+    eventSave.preventDefault()
+    saveElement()
 })
 
 initialCards.forEach(function (item) {
@@ -75,7 +112,6 @@ initialCards.forEach(function (item) {
     elementCard.querySelector('.element__image').src = item.link
     elementCard.querySelector('.element__image').alt = item.name
     elementCard.querySelector('.element__title').textContent = item.name
-    console.log(item.name)
 
     sectionElements.append(elementCard)
 })
