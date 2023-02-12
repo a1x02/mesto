@@ -1,0 +1,13 @@
+.popup__image-container {
+  margin: 90px auto 68px;
+  padding: 0;
+  position: relative;
+
+  /*border: 1px solid red;*/
+}
+
+@media screen and (max-width: 580px) {
+  .popup__image-container {
+    margin-top: 136px;
+  }
+}

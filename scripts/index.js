@@ -1,21 +1,30 @@
 const profile = document.querySelector('.profile')
 const editButton = profile.querySelector('.profile__edit-button')
 const addButton = profile.querySelector('.profile__add-button')
-const popup = document.querySelector('.popup')
+
 const popupEdit = document.querySelector('#popup-edit')
 const popupAdd = document.querySelector('#popup-add')
+const popupImage = document.querySelector('#popup-image')
+
 const closeButtonEdit = popupEdit.querySelector('.popup__close')
 const closeButtonAdd = popupAdd.querySelector('.popup__close')
+const closeButtonImage = popupImage.querySelector('.popup__close')
+
 const formEdit = popupEdit.querySelector('#form-edit')
 const formAdd = popupAdd.querySelector('#form-add')
 const formAddName = formAdd.querySelector('.popup__input_subject_name')
 const formAddLink = formAdd.querySelector('.popup__input_subject_description')
+
 const profileName = profile.querySelector('.profile__name')
 const profileDescription = profile.querySelector('.profile__description')
 const formEditName = formEdit.querySelector('.popup__input_subject_name')
 const formEditDescription = formEdit.querySelector('.popup__input_subject_description')
+
 const elementTemplate = document.querySelector('#element-template').content
 const sectionElements = document.querySelector('.elements')
+
+const itemImage = popupImage.querySelector('.popup__image')
+const itemDescription = popupImage.querySelector('.popup__description')
 
 
 const initialCards = [
@@ -56,12 +65,19 @@ const openPopUpAdd = function () {
     popupAdd.classList.add('popup_opened', true)
 }
 
+const openPopUpImage = function () {
+    popupImage.classList.add('popup_opened', true)
+}
+
 const closePopUp = function () {
     if (popupEdit.classList.contains('popup_opened')) {
         popupEdit.classList.remove('popup_opened')
     }
     if (popupAdd.classList.contains('popup_opened')) {
         popupAdd.classList.remove('popup_opened')
+    }
+    if (popupImage.classList.contains('popup_opened')) {
+        popupImage.classList.remove('popup_opened')
     }
 }
 
@@ -111,6 +127,11 @@ closeButtonAdd.addEventListener('click', (eventClose) => {
     closePopUp()
 })
 
+closeButtonImage.addEventListener('click', (eventClose) => {
+    eventClose.preventDefault()
+    closePopUp()
+})
+
 formEdit.addEventListener('submit', (eventSave) => {
     eventSave.preventDefault()
     saveProfile()
@@ -129,6 +150,7 @@ initialCards.forEach(function (item) {
 
     const deleteButton = elementCard.querySelector('.delete-button')
     const likeButton = elementCard.querySelector('.element__like-button')
+    const cardImage = elementCard.querySelector('.element__image')
 
     deleteButton.addEventListener('click', (eventDelete) => {
         eventDelete.preventDefault()
@@ -139,6 +161,14 @@ initialCards.forEach(function (item) {
     likeButton.addEventListener('click', (eventLike) => {
         eventLike.preventDefault()
         likeButton.classList.toggle('element__like-button_active')
+    })
+
+    cardImage.addEventListener('click', (eventOpen) => {
+        eventOpen.preventDefault()
+        itemImage.src = item.link
+        itemImage.alt = item.name
+        itemDescription.textContent = item.name
+        openPopUpImage()
     })
 
     sectionElements.append(elementCard)
