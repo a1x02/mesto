@@ -75,6 +75,8 @@ const closePopUp = function () {
     }
     if (popupAdd.classList.contains('popup_opened')) {
         popupAdd.classList.remove('popup_opened')
+        formAddName.value = ''
+        formAddLink.value = ''
     }
     if (popupImage.classList.contains('popup_opened')) {
         popupImage.classList.remove('popup_opened')
