@@ -26,7 +26,6 @@ const sectionElements = document.querySelector('.elements')
 const itemImage = popupImage.querySelector('.popup__image')
 const itemDescription = popupImage.querySelector('.popup__description')
 
-
 const initialCards = [
     {
         name: 'Архыз',
@@ -54,105 +53,13 @@ const initialCards = [
     }
 ];
 
-const openPopUpEdit = function () {
-    formEditName.value = profileName.textContent
-    formEditDescription.value = profileDescription.textContent
-
-    popupEdit.classList.add('popup_opened', true)
+const openPopUp = function (popupName) {
+    popupName.classList.add('popup_opened')
 }
 
-const openPopUpAdd = function () {
-    popupAdd.classList.add('popup_opened', true)
-}
-
-const openPopUpImage = function () {
-    popupImage.classList.add('popup_opened', true)
-}
-
-const closePopUp = function () {
-    if (popupEdit.classList.contains('popup_opened')) {
-        popupEdit.classList.remove('popup_opened')
-    }
-    if (popupAdd.classList.contains('popup_opened')) {
-        popupAdd.classList.remove('popup_opened')
-        formAddName.value = ''
-        formAddLink.value = ''
-    }
-    if (popupImage.classList.contains('popup_opened')) {
-        popupImage.classList.remove('popup_opened')
-    }
-}
-
-const saveProfile = function () {
-    profileName.textContent = formEditName.value
-    profileDescription.textContent = formEditDescription.value
-
-    formEditName.value = ''
-    formEditDescription.value = ''
-    closePopUp()
-}
-
-const saveElement = function () {
-    const elementCard = elementTemplate.querySelector('.element').cloneNode(true)
-    elementCard.querySelector('.element__image').src = formAddLink.value
-    elementCard.querySelector('.element__image').alt = formAddName.value
-    elementCard.querySelector('.element__title').textContent = formAddName.value
-
+const createCard = function (elementCard, cardImage) {
     const deleteButton = elementCard.querySelector('.delete-button')
     const likeButton = elementCard.querySelector('.element__like-button')
-
-    deleteButton.addEventListener('click', (eventDelete) => {
-        eventDelete.preventDefault()
-        const elementsItem = deleteButton.closest('.element')
-        elementsItem.remove()
-    })
-
-    likeButton.addEventListener('click', (eventLike) => {
-        eventLike.preventDefault()
-        likeButton.classList.toggle('element__like-button_active')
-    })
-
-    sectionElements.prepend(elementCard)
-    closePopUp()
-}
-
-editButton.addEventListener('click', openPopUpEdit)
-addButton.addEventListener('click', openPopUpAdd)
-
-closeButtonEdit.addEventListener('click', (eventClose) => {
-    eventClose.preventDefault()
-    closePopUp()
-})
-
-closeButtonAdd.addEventListener('click', (eventClose) => {
-    eventClose.preventDefault()
-    closePopUp()
-})
-
-closeButtonImage.addEventListener('click', (eventClose) => {
-    eventClose.preventDefault()
-    closePopUp()
-})
-
-formEdit.addEventListener('submit', (eventSave) => {
-    eventSave.preventDefault()
-    saveProfile()
-})
-
-formAdd.addEventListener('submit', (eventSave) => {
-    eventSave.preventDefault()
-    saveElement()
-})
-
-initialCards.forEach(function (item) {
-    const elementCard = elementTemplate.querySelector('.element').cloneNode(true)
-    elementCard.querySelector('.element__image').src = item.link
-    elementCard.querySelector('.element__image').alt = item.name
-    elementCard.querySelector('.element__title').textContent = item.name
-
-    const deleteButton = elementCard.querySelector('.delete-button')
-    const likeButton = elementCard.querySelector('.element__like-button')
-    const cardImage = elementCard.querySelector('.element__image')
 
     deleteButton.addEventListener('click', (eventDelete) => {
         eventDelete.preventDefault()
@@ -167,12 +74,87 @@ initialCards.forEach(function (item) {
 
     cardImage.addEventListener('click', (eventOpen) => {
         eventOpen.preventDefault()
-        itemImage.src = item.link
-        itemImage.alt = item.name
-        itemDescription.textContent = item.name
-        openPopUpImage()
+        itemImage.src = cardImage.src
+        itemImage.alt = cardImage.alt
+        itemDescription.textContent = cardImage.alt
+        openPopUp(popupImage)
     })
+}
 
+const closePopUp = function (popupName) {
+    if (popupName.classList.contains('popup_opened')) {
+        popupName.classList.remove('popup_opened')
+        if (popupName === popupAdd) {
+            formAdd.reset()
+        }
+        if (popupName === popupEdit) {
+            formEdit.reset()
+        }
+    }
+}
+
+const saveProfile = function () {
+    profileName.textContent = formEditName.value
+    profileDescription.textContent = formEditDescription.value
+
+    formEdit.reset()
+    closePopUp(popupEdit)
+}
+
+const saveElement = function () {
+    const elementCard = elementTemplate.querySelector('.element').cloneNode(true)
+    const cardImage = elementCard.querySelector('.element__image')
+    cardImage.src = formAddLink.value
+    cardImage.alt = formAddName.value
+    elementCard.querySelector('.element__title').textContent = formAddName.value
+
+    createCard(elementCard, cardImage)
+    sectionElements.prepend(elementCard)
+    closePopUp(popupAdd)
+}
+
+editButton.addEventListener('click', (eventOpen) => {
+    eventOpen.preventDefault()
+    openPopUp(popupEdit)
+})
+addButton.addEventListener('click', (eventOpen) => {
+    eventOpen.preventDefault()
+    openPopUp(popupAdd)
+})
+
+closeButtonEdit.addEventListener('click', (eventClose) => {
+    eventClose.preventDefault()
+    closePopUp(popupEdit)
+})
+
+closeButtonAdd.addEventListener('click', (eventClose) => {
+    eventClose.preventDefault()
+    closePopUp(popupAdd)
+})
+
+closeButtonImage.addEventListener('click', (eventClose) => {
+    eventClose.preventDefault()
+    closePopUp(popupImage)
+})
+
+formEdit.addEventListener('submit', (eventSave) => {
+    eventSave.preventDefault()
+    saveProfile()
+})
+
+formAdd.addEventListener('submit', (eventSave) => {
+    eventSave.preventDefault()
+    saveElement()
+})
+
+initialCards.forEach(function (item) {
+    const elementCard = elementTemplate.querySelector('.element').cloneNode(true)
+    const cardImage = elementCard.querySelector('.element__image')
+    cardImage.src = item.link
+    cardImage.alt = item.name
+    elementCard.querySelector('.element__title').textContent = item.name
+
+    createCard(elementCard, cardImage)
     sectionElements.append(elementCard)
 })
 
