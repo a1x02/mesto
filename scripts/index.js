@@ -82,15 +82,7 @@ const createCard = function (elementCard, cardImage) {
 }
 
 const closePopUp = function (popupName) {
-    if (popupName.classList.contains('popup_opened')) {
-        popupName.classList.remove('popup_opened')
-        if (popupName === popupAdd) {
-            formAdd.reset()
-        }
-        if (popupName === popupEdit) {
-            formEdit.reset()
-        }
-    }
+    popupName.classList.remove('popup_opened')
 }
 
 const saveProfile = function () {
@@ -124,11 +116,13 @@ addButton.addEventListener('click', (eventOpen) => {
 
 closeButtonEdit.addEventListener('click', (eventClose) => {
     eventClose.preventDefault()
+    formEdit.reset()
     closePopUp(popupEdit)
 })
 
 closeButtonAdd.addEventListener('click', (eventClose) => {
     eventClose.preventDefault()
+    formAdd.reset()
     closePopUp(popupAdd)
 })
 
@@ -140,11 +134,13 @@ closeButtonImage.addEventListener('click', (eventClose) => {
 formEdit.addEventListener('submit', (eventSave) => {
     eventSave.preventDefault()
     saveProfile()
+    formEdit.reset()
 })
 
 formAdd.addEventListener('submit', (eventSave) => {
     eventSave.preventDefault()
     saveElement()
+    formAdd.reset()
 })
 
 initialCards.forEach(function (item) {
