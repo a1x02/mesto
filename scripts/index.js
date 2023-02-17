@@ -57,7 +57,13 @@ const openPopUp = function (popupName) {
     popupName.classList.add('popup_opened')
 }
 
-const createCard = function (elementCard, cardImage) {
+const createCard = function (cardLink, cardName) {
+    const elementCard = elementTemplate.querySelector('.element').cloneNode(true)
+    const cardImage = elementCard.querySelector('.element__image')
+    cardImage.src = cardLink
+    cardImage.alt = cardName
+    elementCard.querySelector('.element__title').textContent = cardName
+
     const deleteButton = elementCard.querySelector('.delete-button')
     const likeButton = elementCard.querySelector('.element__like-button')
 
@@ -79,6 +85,8 @@ const createCard = function (elementCard, cardImage) {
         itemDescription.textContent = cardImage.alt
         openPopUp(popupImage)
     })
+
+    return elementCard
 }
 
 const closePopUp = function (popupName) {
@@ -94,14 +102,14 @@ const saveProfile = function () {
 }
 
 const saveElement = function () {
-    const elementCard = elementTemplate.querySelector('.element').cloneNode(true)
-    const cardImage = elementCard.querySelector('.element__image')
-    cardImage.src = formAddLink.value
-    cardImage.alt = formAddName.value
-    elementCard.querySelector('.element__title').textContent = formAddName.value
+    // const elementCard = elementTemplate.querySelector('.element').cloneNode(true)
+    // const cardImage = elementCard.querySelector('.element__image')
+    // cardImage.src = formAddLink.value
+    // cardImage.alt = formAddName.value
+    // elementCard.querySelector('.element__title').textContent = formAddName.value
 
-    createCard(elementCard, cardImage)
-    sectionElements.prepend(elementCard)
+    // createCard(elementCard, cardImage)
+    sectionElements.prepend(createCard(formAddLink.value, formAddName.value))
     closePopUp(popupAdd)
 }
 
@@ -144,14 +152,12 @@ formAdd.addEventListener('submit', (eventSave) => {
 })
 
 initialCards.forEach(function (item) {
-    const elementCard = elementTemplate.querySelector('.element').cloneNode(true)
-    const cardImage = elementCard.querySelector('.element__image')
-    cardImage.src = item.link
-    cardImage.alt = item.name
-    elementCard.querySelector('.element__title').textContent = item.name
-
-    createCard(elementCard, cardImage)
-    sectionElements.append(elementCard)
+    // const elementCard = elementTemplate.querySelector('.element').cloneNode(true)
+    // const cardImage = elementCard.querySelector('.element__image')
+    // cardImage.src = item.link
+    // cardImage.alt = item.name
+    // elementCard.querySelector('.element__title').textContent = item.name
+    //
+    // sectionElements.append(elementCard)
+    sectionElements.append(createCard(item.link, item.name))
 })
-
-
