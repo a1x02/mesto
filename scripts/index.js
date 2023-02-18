@@ -1,24 +1,24 @@
 const profile = document.querySelector('.profile')
-const editButton = profile.querySelector('.profile__edit-button')
-const addButton = profile.querySelector('.profile__add-button')
+const buttonOpenEditProfilePopup = profile.querySelector('.profile__edit-button')
+const buttonOpenAddCardPopup = profile.querySelector('.profile__add-button')
 
-const popupEdit = document.querySelector('#popup-edit')
-const popupAdd = document.querySelector('#popup-add')
+const popupEditProfile = document.querySelector('#popup-edit')
+const popupAddCard = document.querySelector('#popup-add')
 const popupImage = document.querySelector('#popup-image')
 
-const closeButtonEdit = popupEdit.querySelector('.popup__close')
-const closeButtonAdd = popupAdd.querySelector('.popup__close')
-const closeButtonImage = popupImage.querySelector('.popup__close')
+const buttonCloseEditProfilePopup = popupEditProfile.querySelector('.popup__close')
+const buttonCloseAddCardPopup = popupAddCard.querySelector('.popup__close')
+const buttonCloseImagePopup = popupImage.querySelector('.popup__close')
 
-const formEdit = popupEdit.querySelector('#form-edit')
-const formAdd = popupAdd.querySelector('#form-add')
-const formAddName = formAdd.querySelector('.popup__input_subject_name')
-const formAddLink = formAdd.querySelector('.popup__input_subject_description')
+const formEditProfile = popupEditProfile.querySelector('#form-edit')
+const formAddCard = popupAddCard.querySelector('#form-add')
+const formAddName = formAddCard.querySelector('.popup__input_subject_name')
+const formAddLink = formAddCard.querySelector('.popup__input_subject_description')
 
 const profileName = profile.querySelector('.profile__name')
 const profileDescription = profile.querySelector('.profile__description')
-const formEditName = formEdit.querySelector('.popup__input_subject_name')
-const formEditDescription = formEdit.querySelector('.popup__input_subject_description')
+const formEditName = formEditProfile.querySelector('.popup__input_subject_name')
+const formEditDescription = formEditProfile.querySelector('.popup__input_subject_description')
 
 const elementTemplate = document.querySelector('#element-template').content
 const sectionElements = document.querySelector('.elements')
@@ -97,67 +97,53 @@ const saveProfile = function () {
     profileName.textContent = formEditName.value
     profileDescription.textContent = formEditDescription.value
 
-    formEdit.reset()
-    closePopUp(popupEdit)
+    formEditProfile.reset()
+    closePopUp(popupEditProfile)
 }
 
 const saveElement = function () {
-    // const elementCard = elementTemplate.querySelector('.element').cloneNode(true)
-    // const cardImage = elementCard.querySelector('.element__image')
-    // cardImage.src = formAddLink.value
-    // cardImage.alt = formAddName.value
-    // elementCard.querySelector('.element__title').textContent = formAddName.value
-
-    // createCard(elementCard, cardImage)
     sectionElements.prepend(createCard(formAddLink.value, formAddName.value))
-    closePopUp(popupAdd)
+    closePopUp(popupAddCard)
 }
 
-editButton.addEventListener('click', (eventOpen) => {
+buttonOpenEditProfilePopup.addEventListener('click', (eventOpen) => {
     eventOpen.preventDefault()
-    openPopUp(popupEdit)
+    openPopUp(popupEditProfile)
 })
-addButton.addEventListener('click', (eventOpen) => {
+buttonOpenAddCardPopup.addEventListener('click', (eventOpen) => {
     eventOpen.preventDefault()
-    openPopUp(popupAdd)
+    openPopUp(popupAddCard)
 })
 
-closeButtonEdit.addEventListener('click', (eventClose) => {
+buttonCloseEditProfilePopup.addEventListener('click', (eventClose) => {
     eventClose.preventDefault()
-    formEdit.reset()
-    closePopUp(popupEdit)
+    formEditProfile.reset()
+    closePopUp(popupEditProfile)
 })
 
-closeButtonAdd.addEventListener('click', (eventClose) => {
+buttonCloseAddCardPopup.addEventListener('click', (eventClose) => {
     eventClose.preventDefault()
-    formAdd.reset()
-    closePopUp(popupAdd)
+    formAddCard.reset()
+    closePopUp(popupAddCard)
 })
 
-closeButtonImage.addEventListener('click', (eventClose) => {
+buttonCloseImagePopup.addEventListener('click', (eventClose) => {
     eventClose.preventDefault()
     closePopUp(popupImage)
 })
 
-formEdit.addEventListener('submit', (eventSave) => {
+formEditProfile.addEventListener('submit', (eventSave) => {
     eventSave.preventDefault()
     saveProfile()
-    formEdit.reset()
+    formEditProfile.reset()
 })
 
-formAdd.addEventListener('submit', (eventSave) => {
+formAddCard.addEventListener('submit', (eventSave) => {
     eventSave.preventDefault()
     saveElement()
-    formAdd.reset()
+    formAddCard.reset()
 })
 
 initialCards.forEach(function (item) {
-    // const elementCard = elementTemplate.querySelector('.element').cloneNode(true)
-    // const cardImage = elementCard.querySelector('.element__image')
-    // cardImage.src = item.link
-    // cardImage.alt = item.name
-    // elementCard.querySelector('.element__title').textContent = item.name
-    //
-    // sectionElements.append(elementCard)
     sectionElements.append(createCard(item.link, item.name))
 })
