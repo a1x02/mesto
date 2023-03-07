@@ -26,6 +26,8 @@ const sectionElements = document.querySelector('.elements')
 const itemImage = popupImage.querySelector('.popup__image')
 const itemDescription = popupImage.querySelector('.popup__description')
 
+const buttonEscapeCode = 'Escape'
+
 const initialCards = [
     {
         name: 'Архыз',
@@ -53,8 +55,19 @@ const initialCards = [
     }
 ];
 
+const closeOnEscape = (popupName) => {
+    document.addEventListener('keydown', (evt) => {
+        if (evt.key === buttonEscapeCode) {
+            closePopUp(popupName)
+            console.log(evt.key)
+        }
+    })
+}
+
 const openPopUp = function (popupName) {
     popupName.classList.add('popup_opened')
+
+    document.addEventListener('keydown', closeOnEscape(popupName))
 }
 
 const createCard = function (cardLink, cardName) {
@@ -91,6 +104,8 @@ const createCard = function (cardLink, cardName) {
 
 const closePopUp = function (popupName) {
     popupName.classList.remove('popup_opened')
+
+    document.removeEventListener('keydown', closeOnEscape)
 }
 
 const saveProfile = function () {
