@@ -59,7 +59,16 @@ const closeOnEscape = (popupName) => {
     document.addEventListener('keydown', (evt) => {
         if (evt.key === buttonEscapeCode) {
             closePopUp(popupName)
-            console.log(evt.key)
+        }
+    })
+}
+
+const closeOnOverlay = () => {
+    document.addEventListener('mousedown', (evt) => {
+        const popupOpened = document.querySelector('.popup_opened')
+
+        if (evt.target.classList.contains('popup_opened')) {
+            closePopUp(popupOpened)
         }
     })
 }
@@ -68,6 +77,7 @@ const openPopUp = function (popupName) {
     popupName.classList.add('popup_opened')
 
     document.addEventListener('keydown', closeOnEscape(popupName))
+    document.addEventListener('mousedown', closeOnOverlay)
 }
 
 const createCard = function (cardLink, cardName) {
@@ -106,6 +116,7 @@ const closePopUp = function (popupName) {
     popupName.classList.remove('popup_opened')
 
     document.removeEventListener('keydown', closeOnEscape)
+    document.removeEventListener('mousedown', closeOnOverlay)
 }
 
 const saveProfile = function () {
