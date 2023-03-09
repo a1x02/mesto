@@ -55,22 +55,18 @@ const initialCards = [
     }
 ];
 
-const closeOnEscape = (popupName) => {
-    document.addEventListener('keydown', (evt) => {
-        if (evt.key === buttonEscapeCode) {
-            closePopUp(popupName)
-        }
-    })
+const closeOnEscape = (evt) => {
+    const popupOpened = document.querySelector('.popup_opened')
+
+    if (evt.key === buttonEscapeCode) {
+        closePopUp(popupOpened)
+    }
 }
 
-const closeOnOverlay = () => {
-    document.addEventListener('mousedown', (evt) => {
-        const popupOpened = document.querySelector('.popup_opened')
-
-        if (evt.target.classList.contains('popup_opened')) {
-            closePopUp(popupOpened)
-        }
-    })
+const closeOnOverlay = (evt) => {
+    if (evt.target.classList.contains('popup_opened')) {
+        closePopUp(evt.target)
+    }
 }
 
 const openPopUp = function (popupName) {
@@ -83,7 +79,7 @@ const openPopUp = function (popupName) {
         disableButtonSubmit(popupName)
     }
 
-    document.addEventListener('keydown', closeOnEscape(popupName))
+    document.addEventListener('keydown', closeOnEscape)
     document.addEventListener('mousedown', closeOnOverlay)
 }
 
