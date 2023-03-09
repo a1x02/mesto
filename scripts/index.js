@@ -75,6 +75,10 @@ const closeOnOverlay = () => {
 
 const openPopUp = function (popupName) {
     popupName.classList.add('popup_opened')
+    if (popupName === popupEditProfile) {
+        formEditName.value = profileName.textContent
+        formEditDescription.value = profileDescription.textContent
+    }
 
     document.addEventListener('keydown', closeOnEscape(popupName))
     document.addEventListener('mousedown', closeOnOverlay)
