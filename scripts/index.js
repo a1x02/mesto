@@ -79,9 +79,18 @@ const openPopUp = function (popupName) {
         formEditName.value = profileName.textContent
         formEditDescription.value = profileDescription.textContent
     }
+    if (popupName !== popupImage) {
+        disableButtonSubmit(popupName)
+    }
 
     document.addEventListener('keydown', closeOnEscape(popupName))
     document.addEventListener('mousedown', closeOnOverlay)
+}
+
+const disableButtonSubmit = (popupName) => {
+    const buttonSubmitElement = popupName.querySelector('.popup__save-button')
+    buttonSubmitElement.disabled = true
+    buttonSubmitElement.classList.add('popup__save-button_inactive')
 }
 
 const createCard = function (cardLink, cardName) {
