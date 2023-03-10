@@ -56,9 +56,9 @@ const initialCards = [
 ];
 
 const closeOnEscape = (evt) => {
-    const popupOpened = document.querySelector('.popup_opened')
 
     if (evt.key === buttonEscapeCode) {
+        const popupOpened = document.querySelector('.popup_opened')
         closePopUp(popupOpened)
     }
 }
@@ -71,13 +71,6 @@ const closeOnOverlay = (evt) => {
 
 const openPopUp = function (popupName) {
     popupName.classList.add('popup_opened')
-    if (popupName === popupEditProfile) {
-        formEditName.value = profileName.textContent
-        formEditDescription.value = profileDescription.textContent
-    }
-    if (popupName !== popupImage) {
-        disableButtonSubmit(popupName)
-    }
 
     document.addEventListener('keydown', closeOnEscape)
     document.addEventListener('mousedown', closeOnOverlay)
@@ -144,10 +137,16 @@ const saveElement = function () {
 buttonOpenEditProfilePopup.addEventListener('click', (eventOpen) => {
     eventOpen.preventDefault()
     openPopUp(popupEditProfile)
+    formEditName.value = profileName.textContent
+    formEditDescription.value = profileDescription.textContent
+    disableButtonSubmit(popupEditProfile)
+
 })
 buttonOpenAddCardPopup.addEventListener('click', (eventOpen) => {
     eventOpen.preventDefault()
     openPopUp(popupAddCard)
+    disableButtonSubmit(popupAddCard)
+
 })
 
 buttonCloseEditProfilePopup.addEventListener('click', (eventClose) => {
