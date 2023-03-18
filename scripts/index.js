@@ -1,3 +1,5 @@
+import {Card} from './Card.js'
+
 const profile = document.querySelector('.profile')
 const buttonOpenEditProfilePopup = profile.querySelector('.profile__edit-button')
 const buttonOpenAddCardPopup = profile.querySelector('.profile__add-button')
@@ -20,7 +22,7 @@ const profileDescription = profile.querySelector('.profile__description')
 const formEditName = formEditProfile.querySelector('.popup__input_subject_name')
 const formEditDescription = formEditProfile.querySelector('.popup__input_subject_description')
 
-const elementTemplate = document.querySelector('#element-template').content
+const elementTemplate = document.querySelector('#element-template')
 const sectionElements = document.querySelector('.elements')
 
 const itemImage = popupImage.querySelector('.popup__image')
@@ -82,37 +84,37 @@ const disableButtonSubmit = (popupName) => {
     buttonSubmitElement.classList.add('popup__save-button_inactive')
 }
 
-const createCard = function (cardLink, cardName) {
-    const elementCard = elementTemplate.querySelector('.element').cloneNode(true)
-    const cardImage = elementCard.querySelector('.element__image')
-    cardImage.src = cardLink
-    cardImage.alt = cardName
-    elementCard.querySelector('.element__title').textContent = cardName
-
-    const deleteButton = elementCard.querySelector('.delete-button')
-    const likeButton = elementCard.querySelector('.element__like-button')
-
-    deleteButton.addEventListener('click', (eventDelete) => {
-        eventDelete.preventDefault()
-        const elementsItem = deleteButton.closest('.element')
-        elementsItem.remove()
-    })
-
-    likeButton.addEventListener('click', (eventLike) => {
-        eventLike.preventDefault()
-        likeButton.classList.toggle('element__like-button_active')
-    })
-
-    cardImage.addEventListener('click', (eventOpen) => {
-        eventOpen.preventDefault()
-        itemImage.src = cardImage.src
-        itemImage.alt = cardImage.alt
-        itemDescription.textContent = cardImage.alt
-        openPopUp(popupImage)
-    })
-
-    return elementCard
-}
+// const createCard = function (cardLink, cardName) {
+//     const elementCard = elementTemplate.querySelector('.element').cloneNode(true)
+//     const cardImage = elementCard.querySelector('.element__image')
+//     cardImage.src = cardLink
+//     cardImage.alt = cardName
+//     elementCard.querySelector('.element__title').textContent = cardName
+//
+//     const deleteButton = elementCard.querySelector('.delete-button')
+//     const likeButton = elementCard.querySelector('.element__like-button')
+//
+//     deleteButton.addEventListener('click', (eventDelete) => {
+//         eventDelete.preventDefault()
+//         const elementsItem = deleteButton.closest('.element')
+//         elementsItem.remove()
+//     })
+//
+//     likeButton.addEventListener('click', (eventLike) => {
+//         eventLike.preventDefault()
+//         likeButton.classList.toggle('element__like-button_active')
+//     })
+//
+//     cardImage.addEventListener('click', (eventOpen) => {
+//         eventOpen.preventDefault()
+//         itemImage.src = cardImage.src
+//         itemImage.alt = cardImage.alt
+//         itemDescription.textContent = cardImage.alt
+//         openPopUp(popupImage)
+//     })
+//
+//     return elementCard
+// }
 
 const closePopUp = function (popupName) {
     popupName.classList.remove('popup_opened')
@@ -130,7 +132,9 @@ const saveProfile = function () {
 }
 
 const saveElement = function () {
-    sectionElements.prepend(createCard(formAddLink.value, formAddName.value))
+    const card = new Card(formAddLink.value, formAddName.value, '#element-template')
+    const cardElement = card.generateCard()
+    sectionElements.prepend(cardElement)
     closePopUp(popupAddCard)
 }
 
@@ -179,5 +183,10 @@ formAddCard.addEventListener('submit', (eventSave) => {
 })
 
 initialCards.forEach(function (item) {
-    sectionElements.append(createCard(item.link, item.name))
+    const card = new Card(item.link, item.name, '#element-template')
+    const cardElement = card.generateCard()
+
+    sectionElements.append(cardElement)
 })
+
+export {openPopUp}
