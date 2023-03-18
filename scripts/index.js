@@ -1,4 +1,5 @@
 import {Card} from './Card.js'
+import {FormValidator} from "./FormValidator.js";
 
 const profile = document.querySelector('.profile')
 const buttonOpenEditProfilePopup = profile.querySelector('.profile__edit-button')
@@ -22,11 +23,7 @@ const profileDescription = profile.querySelector('.profile__description')
 const formEditName = formEditProfile.querySelector('.popup__input_subject_name')
 const formEditDescription = formEditProfile.querySelector('.popup__input_subject_description')
 
-const elementTemplate = document.querySelector('#element-template')
 const sectionElements = document.querySelector('.elements')
-
-const itemImage = popupImage.querySelector('.popup__image')
-const itemDescription = popupImage.querySelector('.popup__description')
 
 const buttonEscapeCode = 'Escape'
 
@@ -83,38 +80,6 @@ const disableButtonSubmit = (popupName) => {
     buttonSubmitElement.disabled = true
     buttonSubmitElement.classList.add('popup__save-button_inactive')
 }
-
-// const createCard = function (cardLink, cardName) {
-//     const elementCard = elementTemplate.querySelector('.element').cloneNode(true)
-//     const cardImage = elementCard.querySelector('.element__image')
-//     cardImage.src = cardLink
-//     cardImage.alt = cardName
-//     elementCard.querySelector('.element__title').textContent = cardName
-//
-//     const deleteButton = elementCard.querySelector('.delete-button')
-//     const likeButton = elementCard.querySelector('.element__like-button')
-//
-//     deleteButton.addEventListener('click', (eventDelete) => {
-//         eventDelete.preventDefault()
-//         const elementsItem = deleteButton.closest('.element')
-//         elementsItem.remove()
-//     })
-//
-//     likeButton.addEventListener('click', (eventLike) => {
-//         eventLike.preventDefault()
-//         likeButton.classList.toggle('element__like-button_active')
-//     })
-//
-//     cardImage.addEventListener('click', (eventOpen) => {
-//         eventOpen.preventDefault()
-//         itemImage.src = cardImage.src
-//         itemImage.alt = cardImage.alt
-//         itemDescription.textContent = cardImage.alt
-//         openPopUp(popupImage)
-//     })
-//
-//     return elementCard
-// }
 
 const closePopUp = function (popupName) {
     popupName.classList.remove('popup_opened')
@@ -188,5 +153,23 @@ initialCards.forEach(function (item) {
 
     sectionElements.append(cardElement)
 })
+
+const formEditProfileValidation = new FormValidator({
+    inputSelector: '.popup__input',
+    submitButtonSelector: '.popup__save-button',
+    inactiveButtonClass: 'popup__save-button_inactive',
+    inputErrorClass: 'popup__input_type_error',
+    errorClass: 'popup__input-error_active'
+}, '#form-edit')
+const formAddCardValidation = new FormValidator({
+    inputSelector: '.popup__input',
+    submitButtonSelector: '.popup__save-button',
+    inactiveButtonClass: 'popup__save-button_inactive',
+    inputErrorClass: 'popup__input_type_error',
+    errorClass: 'popup__input-error_active'
+}, '#form-add')
+
+formEditProfileValidation.enableValidation()
+formAddCardValidation.enableValidation()
 
 export {openPopUp}
