@@ -11,3 +11,7 @@
   background-color: rgba(0, 0, 0, .5);
   transition: visibility 0s, opacity 0.3s linear;
 }
+
+#popup-image {
+  background-color: rgba(0, 0, 0, .9);
+}
