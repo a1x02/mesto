@@ -25,7 +25,7 @@ const formEditDescription = formEditProfile.querySelector('.popup__input_subject
 
 const sectionElements = document.querySelector('.elements')
 
-const buttonEscapeCode = 'Escape'
+const buttonSubmit = popupAddCard.querySelector('.popup__save-button')
 
 const initialCards = [
     {
@@ -55,8 +55,8 @@ const initialCards = [
 ];
 
 const closeOnEscape = (evt) => {
-
-    if (evt.key === buttonEscapeCode) {
+    if (evt.key === 'Escape') {
+        evt.preventDefault()
         const popupOpened = document.querySelector('.popup_opened')
         closePopUp(popupOpened)
     }
@@ -72,20 +72,14 @@ const openPopUp = function (popupName) {
     popupName.classList.add('popup_opened')
 
     document.addEventListener('keydown', closeOnEscape)
-    document.addEventListener('mousedown', closeOnOverlay)
-}
-
-const disableButtonSubmit = (popupName) => {
-    const buttonSubmitElement = popupName.querySelector('.popup__save-button')
-    buttonSubmitElement.disabled = true
-    buttonSubmitElement.classList.add('popup__save-button_inactive')
+    popupName.addEventListener('mousedown', closeOnOverlay)
 }
 
 const closePopUp = function (popupName) {
     popupName.classList.remove('popup_opened')
 
     document.removeEventListener('keydown', closeOnEscape)
-    document.removeEventListener('mousedown', closeOnOverlay)
+    popupName.removeEventListener('mousedown', closeOnOverlay)
 }
 
 const saveProfile = function () {
@@ -97,10 +91,14 @@ const saveProfile = function () {
 }
 
 const saveElement = function () {
-    const card = new Card(formAddLink.value, formAddName.value, '#element-template')
-    const cardElement = card.generateCard()
-    sectionElements.prepend(cardElement)
+    sectionElements.prepend(createCard(formAddLink.value, formAddName.value, '#element-template'))
     closePopUp(popupAddCard)
+}
+
+const createCard = function (cardLink, cardName, cardTemplate) {
+    const card = new Card(cardLink, cardName, cardTemplate)
+
+    return card.generateCard()
 }
 
 buttonOpenEditProfilePopup.addEventListener('click', (eventOpen) => {
@@ -108,30 +106,26 @@ buttonOpenEditProfilePopup.addEventListener('click', (eventOpen) => {
     openPopUp(popupEditProfile)
     formEditName.value = profileName.textContent
     formEditDescription.value = profileDescription.textContent
-    disableButtonSubmit(popupEditProfile)
 
 })
 buttonOpenAddCardPopup.addEventListener('click', (eventOpen) => {
     eventOpen.preventDefault()
     openPopUp(popupAddCard)
-    disableButtonSubmit(popupAddCard)
-
+    buttonSubmit.disabled = true
+    buttonSubmit.classList.add('popup__save-button_inactive')
 })
 
-buttonCloseEditProfilePopup.addEventListener('click', (eventClose) => {
-    eventClose.preventDefault()
-    formEditProfile.reset()
+buttonCloseEditProfilePopup.addEventListener('click', () => {
+    // formEditProfile.reset()
     closePopUp(popupEditProfile)
 })
 
-buttonCloseAddCardPopup.addEventListener('click', (eventClose) => {
-    eventClose.preventDefault()
-    formAddCard.reset()
+buttonCloseAddCardPopup.addEventListener('click', () => {
+    // formAddCard.reset()
     closePopUp(popupAddCard)
 })
 
-buttonCloseImagePopup.addEventListener('click', (eventClose) => {
-    eventClose.preventDefault()
+buttonCloseImagePopup.addEventListener('click', () => {
     closePopUp(popupImage)
 })
 
@@ -148,10 +142,7 @@ formAddCard.addEventListener('submit', (eventSave) => {
 })
 
 initialCards.forEach(function (item) {
-    const card = new Card(item.link, item.name, '#element-template')
-    const cardElement = card.generateCard()
-
-    sectionElements.append(cardElement)
+    sectionElements.append(createCard(item.link, item.name, '#element-template'))
 })
 
 const formEditProfileValidation = new FormValidator({
