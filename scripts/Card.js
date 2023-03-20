@@ -34,18 +34,15 @@ class Card {
         this._popupImage = document.querySelector('#popup-image')
         this._itemImage = this._popupImage.querySelector('.popup__image')
 
-        this._buttonDelete.addEventListener('click', (eventDelete) => {
-            eventDelete.preventDefault()
+        this._buttonDelete.addEventListener('click', () => {
             this._handleButtonDeleteClick()
         })
 
-        this._buttonLike.addEventListener('click', (eventLike) => {
-            eventLike.preventDefault()
+        this._buttonLike.addEventListener('click', () => {
             this._handleButtonLikeClick()
         })
 
-        this._cardImage.addEventListener('click', (eventOpen) => {
-            eventOpen.preventDefault()
+        this._cardImage.addEventListener('click', () => {
             this._itemImage.src = this._cardImage.src
             this._itemImage.alt = this._cardImage.alt
             this._popupImage.querySelector('.popup__description').textContent = this._cardImage.alt
@@ -58,7 +55,8 @@ class Card {
     }
 
     _handleButtonDeleteClick() {
-        this._buttonDelete.closest('.element').remove()
+        this._cardElement.remove()
+        this._cardElement = null
     }
 }
 
