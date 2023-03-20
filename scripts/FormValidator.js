@@ -9,11 +9,7 @@ class FormValidator {
     }
 
     enableValidation() {
-        this._setEventListeners(this._formElement, this._inputSelector,
-            this._submitButtonSelector,
-            this._inactiveButtonClass,
-            this._inputErrorClass,
-            this._errorClass)
+        this._setEventListeners()
     }
 
     _isValid(inputElement) {
