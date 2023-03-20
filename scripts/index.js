@@ -160,14 +160,14 @@ const formEditProfileValidation = new FormValidator({
     inactiveButtonClass: 'popup__save-button_inactive',
     inputErrorClass: 'popup__input_type_error',
     errorClass: 'popup__input-error_active'
-}, '#form-edit')
+}, formEditProfile)
 const formAddCardValidation = new FormValidator({
     inputSelector: '.popup__input',
     submitButtonSelector: '.popup__save-button',
     inactiveButtonClass: 'popup__save-button_inactive',
     inputErrorClass: 'popup__input_type_error',
     errorClass: 'popup__input-error_active'
-}, '#form-add')
+}, formAddCard)
 
 formEditProfileValidation.enableValidation()
 formAddCardValidation.enableValidation()
