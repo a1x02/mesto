@@ -72,14 +72,12 @@ const openPopUp = function (popupName) {
     popupName.classList.add('popup_opened')
 
     document.addEventListener('keydown', closeOnEscape)
-    popupName.addEventListener('mousedown', closeOnOverlay)
 }
 
 const closePopUp = function (popupName) {
     popupName.classList.remove('popup_opened')
 
     document.removeEventListener('keydown', closeOnEscape)
-    popupName.removeEventListener('mousedown', closeOnOverlay)
 }
 
 const saveProfile = function () {
@@ -101,27 +99,28 @@ const createCard = function (cardLink, cardName, cardTemplate) {
     return card.generateCard()
 }
 
+popupEditProfile.addEventListener('mousedown', closeOnOverlay)
+
+popupAddCard.addEventListener('mousedown', closeOnOverlay)
+
+popupImage.addEventListener('mousedown', closeOnOverlay)
+
 buttonOpenEditProfilePopup.addEventListener('click', (eventOpen) => {
-    eventOpen.preventDefault()
     openPopUp(popupEditProfile)
     formEditName.value = profileName.textContent
     formEditDescription.value = profileDescription.textContent
 
 })
 buttonOpenAddCardPopup.addEventListener('click', (eventOpen) => {
-    eventOpen.preventDefault()
     openPopUp(popupAddCard)
-    buttonSubmit.disabled = true
-    buttonSubmit.classList.add('popup__save-button_inactive')
+    formAddCard.reset()
 })
 
 buttonCloseEditProfilePopup.addEventListener('click', () => {
-    // formEditProfile.reset()
     closePopUp(popupEditProfile)
 })
 
 buttonCloseAddCardPopup.addEventListener('click', () => {
-    // formAddCard.reset()
     closePopUp(popupAddCard)
 })
 
