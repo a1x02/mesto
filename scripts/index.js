@@ -25,8 +25,6 @@ const formEditDescription = formEditProfile.querySelector('.popup__input_subject
 
 const sectionElements = document.querySelector('.elements')
 
-const buttonSubmit = popupAddCard.querySelector('.popup__save-button')
-
 const initialCards = [
     {
         name: 'Архыз',
@@ -105,13 +103,13 @@ popupAddCard.addEventListener('mousedown', closeOnOverlay)
 
 popupImage.addEventListener('mousedown', closeOnOverlay)
 
-buttonOpenEditProfilePopup.addEventListener('click', (eventOpen) => {
+buttonOpenEditProfilePopup.addEventListener('click', () => {
     openPopUp(popupEditProfile)
     formEditName.value = profileName.textContent
     formEditDescription.value = profileDescription.textContent
 
 })
-buttonOpenAddCardPopup.addEventListener('click', (eventOpen) => {
+buttonOpenAddCardPopup.addEventListener('click', () => {
     openPopUp(popupAddCard)
     formAddCard.reset()
     formAddCardValidation.disableButtonSubmit()
