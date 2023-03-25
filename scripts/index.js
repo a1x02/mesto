@@ -114,6 +114,7 @@ buttonOpenEditProfilePopup.addEventListener('click', (eventOpen) => {
 buttonOpenAddCardPopup.addEventListener('click', (eventOpen) => {
     openPopUp(popupAddCard)
     formAddCard.reset()
+    formAddCardValidation.disableButtonSubmit()
 })
 
 buttonCloseEditProfilePopup.addEventListener('click', () => {
