@@ -12,6 +12,11 @@ class FormValidator {
         this._setEventListeners()
     }
 
+    disableButtonSubmit() {
+        this._buttonElement.disabled = true
+        this._buttonElement.classList.add(this._inactiveButtonClass)
+    }
+
     _isValid(inputElement) {
         if (!inputElement.validity.valid) {
             this._showInputError(inputElement, inputElement.validationMessage)
