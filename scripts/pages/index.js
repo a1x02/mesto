@@ -1,5 +1,6 @@
 import {Card} from '../components/Card.js'
 import {FormValidator} from "../components/FormValidator.js";
+import Section from "../components/Section.js";
 
 const profile = document.querySelector('.profile')
 const buttonOpenEditProfilePopup = profile.querySelector('.profile__edit-button')
@@ -139,9 +140,21 @@ formAddCard.addEventListener('submit', (eventSave) => {
     formAddCard.reset()
 })
 
-initialCards.forEach(function (item) {
-    sectionElements.append(createCard(item.link, item.name, '#element-template'))
-})
+// initialCards.forEach(function (item) {
+//     sectionElements.append(createCard(item.link, item.name, '#element-template'))
+// })
+
+const itemList = new Section({
+    items: initialCards,
+    renderer: (item) => {
+        const card = new Card(item.link, item.name, '#element-template')
+        const cardElement = card.generateCard()
+
+        itemList.addItem(cardElement)
+    },
+}, '.elements')
+
+itemList.renderItems()
 
 const formEditProfileValidation = new FormValidator({
     inputSelector: '.popup__input',
