@@ -12,7 +12,9 @@
     </header>
     <main class="content">
       <section class="profile">
-        <img class="profile__avatar" src="<%=require('./images/profile__avatar.jpg')%>" alt="аватар пользователя">
+        <button class="profile__avatar_edit">
+          <img class="profile__avatar" src="<%=require('./images/profile__avatar.jpg')%>" alt="аватар пользователя">
+        </button>
         <div class="profile-info">
           <div class="profile__top">
             <h1 class="profile__name">Жак-Ив Кусто</h1>
@@ -69,6 +71,26 @@
         <button class="popup__close" type="button"></button>
         <img class="popup__image" src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg" alt="Архыз">
         <p class="popup__description"></p>
+      </div>
+    </section>
+    <section class="popup" id="popup-avatar">
+      <div class="popup__container">
+        <button type="button" class="popup__close"></button>
+        <form class="popup__form" novalidate name="popup-form" id="form-avatar">
+          <h2 class="popup__title">Обновить аватар</h2>
+          <input class="popup__input popup__input_subject_avatar" name="popup-input-avatar" id="avatar-input" type="url" placeholder="Ссылка на аватар" required value="">
+          <span class="popup__input-error link-input-error"></span>
+          <button type="submit" class="popup__save-button popup__save-button_inactive">Сохранить</button>
+        </form>
+      </div>
+    </section>
+    <section class="popup" id="popup-confirmation">
+      <div class="popup__container">
+        <button type="button" class="popup__close"></button>
+        <form class="popup__form">
+          <h2 class="popup__title">Вы уверены?</h2>
+          <button type="submit" class="popup__save-button">Да</button>
+        </form>
       </div>
     </section>
     <template id="element-template">
