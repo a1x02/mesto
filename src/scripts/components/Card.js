@@ -16,7 +16,7 @@ export default class Card {
         return  document
             .querySelector(this._cardTemplate)
             .content
-            .querySelector('.element')
+            // .querySelector('.element')
             .cloneNode(true)
     }
 
@@ -77,6 +77,15 @@ export default class Card {
     }
 
     _deleteCard() {
-        this._handleCardDelete(this._cardId)
+        if (this._ownerId === this._userId) {
+            this._handleCardDelete(this._cardId);
+        } else {
+            this._buttonDelete.closest('.element').remove()
+        }
+
+    }
+
+    delete() {
+        this._buttonDelete.closest('.element').remove()
     }
 }

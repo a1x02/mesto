@@ -1,8 +1,18 @@
 .element__description {
-  margin: 25px 15px 31px 21px;
+  margin: 23px 20px 22px 21px;
   padding: 0;
-  max-width: 246px;
+  /*max-width: 246px;*/
+  /*display: flex;*/
+  /*flex-direction: row;*/
+  /*!*border: 1px solid red;*!*/
+  height: 35px;
+  width: 246px;
   display: flex;
-  flex-direction: row;
-  /*border: 1px solid red;*/
+  align-items: flex-end;
+  justify-content: space-between;
+  align-self: center;
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 29px;
+  box-sizing: border-box;
 }

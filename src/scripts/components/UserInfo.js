@@ -17,7 +17,7 @@ export default class UserInfo {
 
     setUserInfo(data) {
         this._profileName.textContent = data.name
-        this._profileDescription.textContent = data.description
+        this._profileDescription.textContent = data.about
         this._userData = data
     }
 
@@ -26,6 +26,6 @@ export default class UserInfo {
     }
 
     getUserId() {
-        return this._userId = this._userData._id
+        return this._userData._id
     }
 }

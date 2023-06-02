@@ -2,7 +2,7 @@ import {profileDescription, profileName} from "../utils/constants";
 
 export default class Api {
     constructor(options) {
-        this._baseUrl = options.baseURL
+        this._baseUrl = options.baseUrl
         this._headers = options.headers
     }
 
@@ -11,6 +11,10 @@ export default class Api {
             return response.json()
         }
         return Promise.reject(`Произошла ошибка: ${response.status}`)
+    }
+
+    getPromiseInfo() {
+        return Promise.all([this._getUserInfo(), this._getInitialCards()])
     }
 
     _getUserInfo() {
@@ -27,13 +31,13 @@ export default class Api {
             .then(this._getResponseInfo)
     }
 
-    patchUserInfo() {
+    patchUserInfo({name, about}) {
         return fetch(`${this._baseUrl}/users/me`, {
             method: 'PATCH',
             headers: this._headers,
             body: JSON.stringify({
-                name: profileName,
-                description: profileDescription
+                name: name,
+                about: about
             })
         })
     }
@@ -44,7 +48,7 @@ export default class Api {
             headers: this._headers,
             body: JSON.stringify({
                 name: formItems.name,
-                link: formItems.link
+                link: formItems.description
             })
         })
             .then(this._getResponseInfo)
@@ -79,7 +83,7 @@ export default class Api {
             method: 'PATCH',
             headers: this._headers,
             body: JSON.stringify({
-                profileImage: profileImage // !!!!!!!!!!!
+                avatar: profileImage
             })
         })
             .then(this._getResponseInfo)

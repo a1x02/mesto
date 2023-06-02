@@ -8,4 +8,5 @@
   display: flex;
   flex-flow: column;
   justify-content: space-between;
+  box-sizing: border-box;
 }
