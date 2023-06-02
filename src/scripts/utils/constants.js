@@ -11,7 +11,7 @@ export const formAddCard = popupAddCard.querySelector('#form-add')
 export const profileName = profile.querySelector('.profile__name')
 export const profileDescription = profile.querySelector('.profile__description')
 export const profileImage = document.querySelector('.profile__avatar')
-export const profileImageOverlay = document.querySelector('.profile__avatar_edit')
+export const profileImageOverlay = document.querySelector('.profile__avatar-edit')
 export const formEditAvatar = document.querySelector('#form-avatar')
 
 export const initialCards = [
