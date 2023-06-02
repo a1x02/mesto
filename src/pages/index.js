@@ -43,8 +43,7 @@ api.getPromiseInfo()
         const [userInfoData, defaultCardsData] = res
         userInfo.setUserInfo(userInfoData)
         userInfo.setUserProfileImage(userInfoData.avatar)
-        const defaultCards = defaultCardsData // TODO: fix redundant
-        itemList.renderItems(defaultCards)
+        itemList.renderItems(defaultCardsData)
     })
     .catch((err) => console.log(err))
 
@@ -74,10 +73,10 @@ const createCard = function (data) {
             popupWithConfirmation.setCloseCallback(() => {
                 api.deleteCard(cardId)
                     .then(() => {
-                        popupWithConfirmation.close()
                         card.delete()
                     })
                     .catch((err) => console.log(err))
+                popupWithConfirmation.close()
             })
         }
     }, '#element-template', userInfo.getUserId())
@@ -99,12 +98,13 @@ const popupProfileWithForm = new PopupWithForm('#popup-edit', (formItems) => {
     api.patchUserInfo(data)
         .then(() => {
             userInfo.setUserInfo(data)
-            popupProfileWithForm.close()
         })
         .catch((err) => console.log(err))
         .finally(() => {
+
             popupProfileWithForm.changeSaveButtonText('Сохранить')
         })
+    popupProfileWithForm.close()
 })
 popupProfileWithForm.setEventListeners()
 
@@ -113,7 +113,6 @@ const popupAddCardWithForm = new PopupWithForm('#popup-add', (formItems) => {
     api.addNewCard(formItems)
         .then((res) => {
             itemList.prependItem(createCard(res))
-            popupAddCardWithForm.close()
         })
         .catch((err) => console.log(err))
         .finally(() => {
@@ -130,17 +129,16 @@ const popupEditAvatarWithForm = new PopupWithForm('#popup-avatar', (formItems) =
 
     api.patchProfileImage(image)
         .then(() => {
-            popupEditAvatarWithForm.close()
             userInfo.setUserProfileImage(image)
-            console.log(image)
         })
         .catch((err) => {
             console.log(err)
-            console.log(image)
         })
         .finally(() => {
+
             popupEditAvatarWithForm.changeSaveButtonText('Сохранить')
         })
+    popupEditAvatarWithForm.close()
 })
 popupEditAvatarWithForm.setEventListeners()
 
@@ -154,30 +152,11 @@ constants.buttonOpenAddCardPopup.addEventListener('click', () => {
 })
 constants.profileImageOverlay.addEventListener('click', () => {
     popupEditAvatarWithForm.open()
-    // constants.formEditAvatar.disableButtonSubmit()
 })
 
-const formEditProfileValidation = new FormValidator({
-    inputSelector: '.popup__input',
-    submitButtonSelector: '.popup__save-button',
-    inactiveButtonClass: 'popup__save-button_inactive',
-    inputErrorClass: 'popup__input_type_error',
-    errorClass: 'popup__input-error_active'
-}, constants.formEditProfile)
-const formAddCardValidation = new FormValidator({
-    inputSelector: '.popup__input',
-    submitButtonSelector: '.popup__save-button',
-    inactiveButtonClass: 'popup__save-button_inactive',
-    inputErrorClass: 'popup__input_type_error',
-    errorClass: 'popup__input-error_active'
-}, constants.formAddCard)
-const formEditAvatarValidation = new FormValidator({
-    inputSelector: '.popup__input',
-    submitButtonSelector: '.popup__save-button',
-    inactiveButtonClass: 'popup__save-button_inactive',
-    inputErrorClass: 'popup__input_type_error',
-    errorClass: 'popup__input-error_active'
-}, constants.formEditAvatar)
+const formEditProfileValidation = new FormValidator(constants.validationConfig, constants.formEditProfile)
+const formAddCardValidation = new FormValidator(constants.validationConfig, constants.formAddCard)
+const formEditAvatarValidation = new FormValidator(constants.validationConfig, constants.formEditAvatar)
 
 formEditProfileValidation.enableValidation()
 formAddCardValidation.enableValidation()
