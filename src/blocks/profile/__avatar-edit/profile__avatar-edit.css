@@ -1,4 +1,4 @@
-.profile__avatar_edit {
+.profile__avatar-edit {
   padding: 0;
   position: relative;
   border-radius: 60px;
@@ -9,8 +9,8 @@
   border: none;
 }
 
-.profile__avatar_edit::after {
-  background-image: url("../../../../images/avatar-edit.svg");
+.profile__avatar-edit::after {
+  background-image: url("../../../images/avatar-edit.svg");
   background-position: center;
   background-color: rgba(0, 0, 0, 0.8);
   border-radius: 100%;
@@ -27,12 +27,12 @@
   z-index: 1;
 }
 
-.profile__avatar_edit:hover::after {
+.profile__avatar-edit:hover::after {
   opacity: 0.8;
 }
 
 @media screen and (max-width: 879px) {
-  .profile__avatar_edit {
+  .profile__avatar-edit {
     margin: 0;
   }
 }
