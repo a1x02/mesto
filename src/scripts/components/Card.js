@@ -18,6 +18,7 @@ export default class Card {
             .content
             // .querySelector('.element')
             .cloneNode(true)
+            .children[0]
     }
 
     generateCard() {
@@ -71,11 +72,6 @@ export default class Card {
         }
     }
 
-    _handleButtonDeleteClick() {
-        this._cardElement.remove()
-        this._cardElement = null
-    }
-
     _deleteCard() {
         if (this._ownerId === this._userId) {
             this._handleCardDelete(this._cardId);
@@ -86,6 +82,7 @@ export default class Card {
     }
 
     delete() {
-        this._buttonDelete.closest('.element').remove()
+        this._cardElement.remove()
+        this._cardElement = null
     }
 }
