@@ -74,9 +74,10 @@ const createCard = function (data) {
                 api.deleteCard(cardId)
                     .then(() => {
                         card.delete()
+                        popupWithConfirmation.close()
                     })
                     .catch((err) => console.log(err))
-                popupWithConfirmation.close()
+
             })
         }
     }, '#element-template', userInfo.getUserId())
@@ -98,13 +99,14 @@ const popupProfileWithForm = new PopupWithForm('#popup-edit', (formItems) => {
     api.patchUserInfo(data)
         .then(() => {
             userInfo.setUserInfo(data)
+            popupProfileWithForm.close()
         })
         .catch((err) => console.log(err))
         .finally(() => {
 
             popupProfileWithForm.changeSaveButtonText('Сохранить')
         })
-    popupProfileWithForm.close()
+
 })
 popupProfileWithForm.setEventListeners()
 
@@ -113,12 +115,12 @@ const popupAddCardWithForm = new PopupWithForm('#popup-add', (formItems) => {
     api.addNewCard(formItems)
         .then((res) => {
             itemList.prependItem(createCard(res))
+            popupAddCardWithForm.close()
         })
         .catch((err) => console.log(err))
         .finally(() => {
             popupAddCardWithForm.changeSaveButtonText('Создать')
         })
-    popupAddCardWithForm.close()
     constants.formAddCard.reset()
 })
 popupAddCardWithForm.setEventListeners()
@@ -130,6 +132,7 @@ const popupEditAvatarWithForm = new PopupWithForm('#popup-avatar', (formItems) =
     api.patchProfileImage(image)
         .then(() => {
             userInfo.setUserProfileImage(image)
+            popupEditAvatarWithForm.close()
         })
         .catch((err) => {
             console.log(err)
@@ -138,7 +141,7 @@ const popupEditAvatarWithForm = new PopupWithForm('#popup-avatar', (formItems) =
 
             popupEditAvatarWithForm.changeSaveButtonText('Сохранить')
         })
-    popupEditAvatarWithForm.close()
+
 })
 popupEditAvatarWithForm.setEventListeners()
 
